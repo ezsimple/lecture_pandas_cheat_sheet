@@ -9,12 +9,23 @@ import seaborn as sns
 import matplotlib as mpl
 import matplotlib.font_manager as fm
 
-font_path = "/usr/share/fonts/truetype/nanum/NanumGothic.ttf"
-font_prop = fm.FontProperties(fname=font_path, size=14)
+# font_path = "/usr/share/fonts/truetype/nanum/NanumGothic.ttf"
+# font_prop = fm.FontProperties(fname=font_path, size=14)
 
 plt.rcParams['font.family'] = 'NanumGothic'
 mpl.rcParams['axes.unicode_minus'] = False
 
+print(mpl.get_configdir())
+print(mpl.get_cachedir())
+print(mpl.matplotlib_fname())
+font_list = fm.findSystemFonts(fontpaths=None, fontext='ttf')
+for font in font_list:
+  font_name = fm.FontProperties(fname=font).get_name()
+  if not font_name.startswith("NanumGothic"):
+    continue
+  # print(font)
+  print(fm.FontProperties(fname=font).get_name())
+  print()
 
 # %%
 url = "http://www.seoul.go.kr/coronaV/coronaStatus.do"
@@ -31,6 +42,8 @@ df.plot.bar(stacked=True)
 
 
 # df.pivot(index='시도명', columns='세부질병코드', values='확진자수')
+
+# %%
 
 # %%
 # 11월 중순 이후 데이터 공개방식 변경
