@@ -12,7 +12,7 @@ import matplotlib.font_manager as fm
 # font_path = "/usr/share/fonts/truetype/nanum/NanumGothic.ttf"
 # font_prop = fm.FontProperties(fname=font_path, size=14)
 
-plt.rcParams['font.family'] = 'NanumGothic'
+plt.rcParams['font.family'] = 'NanumGothic' # 시스템에 폰트설치후, 시스템 재시작
 mpl.rcParams['axes.unicode_minus'] = False
 
 print(mpl.get_configdir())
@@ -30,6 +30,7 @@ for font in font_list:
 # %%
 url = "http://www.seoul.go.kr/coronaV/coronaStatus.do"
 table = pd.read_html(url)
+print(len(table))
 
 df = table[3]
 df.drop(df.columns[:2], axis=1, inplace=True)
@@ -37,11 +38,10 @@ df = df.transpose()
 df.rename(columns = {0:'총 확진자(A+B)', 1:'PCR검사자', 2:'PCR확진자(A)', 3:'PCR확진율(%)', 4: '전문가용RAT확진자(B)'}, inplace = True)
 df.head()
 
-# plt.figure(figsize=(18, 8))
-df.plot.bar(stacked=True)
-
-
-# df.pivot(index='시도명', columns='세부질병코드', values='확진자수')
+# df.plot.bar(stacked=True, figsize=(14, 8))
+# df.plot.line(figsize=(14, 8))
+# df.plot.pie(subplots=True, figsize=(14, 8))
+df.plot.area(figsize=(14, 8), alpha=0.5, grid=True)
 
 # %%
 
@@ -70,6 +70,6 @@ def get_seoul_covid19_data(page_no):
     data = jsonObj["data"]
     return data
 
-data = get_seoul_covid19_data()
+data = get_seoul_covid19_data(1)
 df = pd.DataFrame(data)
 df
