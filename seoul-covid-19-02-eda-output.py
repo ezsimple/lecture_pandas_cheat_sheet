@@ -11,13 +11,15 @@ import seaborn as sns
 import matplotlib as mpl
 
 # 한글화 작업
+plt.figure(dpi=600) # 그래프를 선명하게
 plt.rc('font', family = 'NanumGothic') # 시스템에 폰트설치후, 시스템 재시작
 plt.rc('axes', unicode_minus = False) # 한글 폰트 사용시 마이너스 폰트가 깨지는 문제 해결
 plt.style.use('fivethirtyeight') # 스타일을 사용해 봅니다.
 
+# %%
 # retina 디스플레이가 지원되는 환경에서 시각화 폰트가 좀 더 선명해 보입니다.
-from IPython.display import set_matplotlib_formats
-set_matplotlib_formats('retina')
+# from IPython.display import set_matplotlib_formats
+# set_matplotlib_formats('retina')
 
 # %%
 # 데이터를 로드 합니다.
